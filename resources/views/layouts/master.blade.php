@@ -6,7 +6,7 @@
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="img/favicon.png">
+  <link rel="shortcut icon" href="website/img/favicon.png">
 
   <title>Сургууль Менежмент</title>
 
@@ -33,7 +33,7 @@
      @include('layouts.header.header')
      @include('layouts.sidebars.sidebar')
      <section id="main-content">
-          
+
      </section>
    </section>
 

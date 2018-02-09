@@ -11,13 +11,21 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',['as'=>'/','uses'=>'LoginController@getLogin']);
+
+Route::post('/login',['as'=>'login','uses'=>'LoginController@postLogin']);
 
 
 
-Route::get('/dashboard', function(){
+Route::group(['middleware'=>['authen']],function(){
 
-           return view('layouts.master');
+                Route::get('/logout',['as'=>'logout','uses'=>'LoginController@getLogout']);
+                Route::get('/dashboard',['as'=>'dashboard','uses'=>'DashboardController@dashboard']);
+
+    });
+Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
+       //for Admin
+       Route::get('/createUser',function(){
+         echo 'this for admin test';
+       });
 });
