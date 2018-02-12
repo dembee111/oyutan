@@ -36,13 +36,13 @@
             <td>{{ $c->shift}}</td>
             <td>{{ $c->time }}</td>
             <td>
-               <a href="#" data-id="{{ $c->class_id }}">
+               <a href="#" data-id="{{ $c->class_id }}" id="class-edit">
                   Program: {{ $c->program }} / Level:{{ $c->level }} / Shift:{{ $c->shift }} / Time: {{ $c->time }} / Batch:{{ $c->batch }}
                   / Group: {{ $c->groups }} / StartDate: {{ date("d-M-y",strtotime( $c->start_date)) }} / EndDate: {{ date("d-M-y",strtotime( $c->end_date)) }}
                </a>
             </td>
             <td style="vertical-align: middle; width:50px;">
-                <button value="{{ $c->class_id }}" class="btn btn-danger btn-sm">Устгах</button>
+                <button value="{{ $c->class_id }}" class="btn btn-danger btn-sm del-class">Устгах</button>
             </td>
           </tr>
       @endforeach

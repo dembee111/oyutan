@@ -52,6 +52,12 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
           //
           Route::get('/manage/course/classinfo',['as'=>'showClassInformation','uses'=>'CourseController@showClassInformation']);
 
+          // class устгах
+          Route::post('/manage/course/class/delete',['as'=>'deleteClass','uses'=>'CourseController@deleteClass']);
+          //засвар
+
+          Route::get('/manage/course/class/edit',['as'=>'editClass','uses'=>'CourseController@editClass']);
+
        //for Admin
        Route::get('/createUser',function(){
          echo 'this for admin test';

@@ -29,7 +29,7 @@
              </header>
              <form action="{{ route('createClass') }}" class="form-horizontal" id="frm-create-class" method="POST">
 							 <input type="hidden" name="active" id="active" value="1">
-
+               <input type="hidden" name="class_id" id="class_id">
                <div class="panel-body" style="border-bottom: 1px solid red;">
                    <div class="form-group">
 
@@ -155,7 +155,7 @@
                       <div class="col-sm-3">
 										     <label for="startDate">Start Date</label>
 												 <div class="input-group">
-												 <input type="text" name="start_date" id="start_date" class="form-control">
+												 <input type="text" name="start_date" id="start_date" class="form-control" required>
 												  <div class="input-group-addon">
 														<span class="fa fa-calendar"></span>
 													</div>
@@ -165,7 +165,7 @@
 												 <div class="col-sm-3">
 													 <label for="endDate">End Date</label>
 													 <div class="input-group">
-													 <input type="text" name="end_date" id="end_date" class="form-control">
+													 <input type="text" name="end_date" id="end_date" class="form-control" required>
 														<div class="input-group-addon">
 															<span class="fa fa-calendar"></span>
 														</div>
@@ -186,7 +186,7 @@
 
                       <div class="panel-heading">Class Information</div>
 											<div class="panel-body" id="add-class-info">
-												
+
 											</div>
 										</div>
 									{{----------------------}}

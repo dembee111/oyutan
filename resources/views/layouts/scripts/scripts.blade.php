@@ -29,12 +29,35 @@ window.Laravel = {!! json_encode([
         })
           $(this).trigger('reset');
       })
-      //==================================================
+      //===============засвар=========================
+       $(document).on('click','#class-edit',function(data){
+          var class_id = $(this).data('id');
+          $.get("{{ route('editClass') }}",{class_id:class_id},function(data){
+                 $('#academic_id').val(data.academic_id);
+                 $('#level_id').val(data.level_id);
+                 $('#shift_id').val(data.shift_id);
+                 $('#time_id').val(data.time_id);
+                 $('#group_id').val(data.group_id);
+                 $('#batch_id').val(data.batch_id);
+                 $('#start_date').val(data.start_date);
+                 $('#end_date').val(data.end_date);
+          })
+       })
+      //===============Устгах ========================
+       $(document).on('click','.del-class', function(e){
+           class_id = $(this).val();
+           $.post(" {{ route('deleteClass')}}",{class_id:class_id},function(data){
+               //showClassInfo($('#academic_id').val());
+           })
+       })
+
+      //=====================================================
       function showClassInfo(academic_id)
       {
         $.get("{{ route('showClassInformation') }}",{academic_id:academic_id},function(data){
 
           $('#add-class-info').empty().append(data);
+          MergeCommonRows($('#table-class-info'));
         })
       }
 
@@ -215,6 +238,27 @@ $('.btn-save-program').on('click',function(){
                $('#description').val("");
    })
 })
+//===================call class========================
+function MergeCommonRows(table){
+  var firstColumnBrakes = [];
+  $.each(table.find('th'),function(i){
+    var previous = null, cellToExtend = null, rowspan = 1;
+    table.find("td:nth-child(" + i + ")").each(function(index, e){
+      var jthis = $(this), content =jthis.text();
+      if (previous == content && content !== "" && $.inArray(index, firstColumnBrakes) === -1){
+        jthis.addClass('hidden');
+        cellToExtend.attr("rowspan", (rowspan = rowspan+1));
+
+      }else{
+        if(1===1) firstColumnBrakes.push(index);
+        rowspan = 1;
+        previous = content;
+        cellToExtend = jthis;
+      }
+    });
+  });
+  $('td.hidden').remove();
+}
 
 
 
