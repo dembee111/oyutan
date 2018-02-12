@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
   <meta name="author" content="GeeksLabs">
@@ -33,7 +34,9 @@
      @include('layouts.header.header')
      @include('layouts.sidebars.sidebar')
      <section id="main-content">
-
+       <div class="wrapper">
+       @yield('content')
+     </div>
      </section>
    </section>
 
@@ -67,7 +70,7 @@
   {!! Html::script('website/js/sparklines.js') !!}
   {!! Html::script('website/js/charts.js') !!}
   {!! Html::script('website/js/jquery.slimscroll.min.js') !!}
-
+   @yield('scripts')
     <script>
       //knob
       $(function() {
@@ -113,5 +116,6 @@
         });
       });
     </script>
+
 </body>
 </html>

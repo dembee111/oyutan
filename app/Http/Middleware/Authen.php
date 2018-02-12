@@ -18,7 +18,7 @@ class Authen
     {
         if (!Auth::guard($guard)->check())
                 {
-                  return redirect()->route('/dashboard');
+                  return redirect()->route('/');
                 }
         return $next($request);
     }
