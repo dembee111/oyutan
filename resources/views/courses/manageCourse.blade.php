@@ -178,6 +178,7 @@
                        </div>
                      <div class="panel-footer">
                           <button type="submit" class="btn btn-default btn-sm">Create Course</button>
+													<button type="button" class="btn btn-success btn-sm btn-update-class">Update Class</button>
                      </div>
 
                   </form>

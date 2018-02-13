@@ -148,6 +148,13 @@ class CourseController extends Controller
              return response(MyClass::find($request->class_id));
            }
         }
+        public function updateClassInfo(Request $request)
+        {
+          if ($request->ajax())
+          {
+              return response(MyClass::updateOrCreate(['class_id'=>$request->class_id],$request->all()));
+          }
+        }
 
 
 }

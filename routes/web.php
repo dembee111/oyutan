@@ -58,6 +58,8 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
 
           Route::get('/manage/course/class/edit',['as'=>'editClass','uses'=>'CourseController@editClass']);
 
+          Route::post('/manage/course/class/update',['as'=>'updateClassInfo','uses'=>'CourseController@updateClassInfo']);
+
        //for Admin
        Route::get('/createUser',function(){
          echo 'this for admin test';

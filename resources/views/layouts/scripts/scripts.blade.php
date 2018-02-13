@@ -29,6 +29,15 @@ window.Laravel = {!! json_encode([
         })
           $(this).trigger('reset');
       })
+      //==============================================
+         $('.btn-update-class').on('click',function(e){
+           e.preventDefault();
+           var data = $('#frm-create-class').serialize();
+           $.post("{{ route('updateClassInfo')}}",data,function(data){
+             showClassInfo(data.academic_id);
+           })
+         })
+
       //===============засвар=========================
        $(document).on('click','#class-edit',function(data){
           var class_id = $(this).data('id');
@@ -41,6 +50,7 @@ window.Laravel = {!! json_encode([
                  $('#batch_id').val(data.batch_id);
                  $('#start_date').val(data.start_date);
                  $('#end_date').val(data.end_date);
+                 $('#class_id').val(data.class_id);
           })
        })
       //===============Устгах ========================
