@@ -60,6 +60,11 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
 
           Route::post('/manage/course/class/update',['as'=>'updateClassInfo','uses'=>'CourseController@updateClassInfo']);
 
+          //---------------------------Student Register------------------------------------------------------------------
+
+          Route::get('/student/getregister',['as'=>'getStudentRegister','uses'=>'StudentController@getStudentRegister']);
+
+          Route::post('/student/postregister',['as'=>'postStudentRegister','uses'=>'StudentController@postStudentRegister']);
        //for Admin
        Route::get('/createUser',function(){
          echo 'this for admin test';
