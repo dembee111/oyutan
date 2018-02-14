@@ -23,6 +23,8 @@
        </div>
        <div class="row">
          <div class="col-lg-12">
+
+
            <section class="panel panel-default">
              <header class="panel-heading">
                Manage Course

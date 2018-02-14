@@ -77,7 +77,7 @@ fieldset legend {
        <div class="panel-heading">
          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"
           style="text-decoration:none;">Choose Academic</a>
-          <a href="#" class="pull-right"><i class="fa fa-plus"></i></a>
+          <a href="#" class="pull-right" id="show-class-info"><i class="fa fa-plus"></i></a>
         </div>
         <div id="collapse1" class="panel-collapse collapse in">
           <div class="panel-body academic-detail"><p></p></div>
@@ -290,7 +290,7 @@ fieldset legend {
            <input type="text" name="current_address" id="current_address" class="form-control">
          </div>
        </div>
-      
+
 
      </div>
    </div>
@@ -303,7 +303,7 @@ fieldset legend {
 </div>
 </div>
 </div>
-
+@include('class.classPopup')
 @endsection
 
 @section('scripts')

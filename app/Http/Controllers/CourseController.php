@@ -112,8 +112,8 @@ class CourseController extends Controller
         //==========================================
             public function showClassInformation(Request $request)
             {
-                  $classes = $this->ClassInformation()->get();
-                  return view('class.classinfo', compact('classes'));
+                 $classes = $this->ClassInformation()->get();
+                 return view('class.classinfo', compact('classes'));
             }
 
 
@@ -129,6 +129,7 @@ class CourseController extends Controller
                                 ->join('times','times.time_id','=','classes.time_id')
                                 ->join('batches','batches.batch_id','=','classes.batch_id')
                                 ->join('groups','groups.group_id','=','classes.group_id')
+
                                 ->orderBy('classes.class_id', 'DESC');
 
 

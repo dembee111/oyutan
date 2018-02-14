@@ -57,19 +57,21 @@ window.Laravel = {!! json_encode([
        $(document).on('click','.del-class', function(e){
            class_id = $(this).val();
            $.post(" {{ route('deleteClass')}}",{class_id:class_id},function(data){
-               //showClassInfo($('#academic_id').val());
+               showClassInfo($('#academic_id').val());
            })
        })
 
       //=====================================================
       function showClassInfo(academic_id)
-      {
-        $.get("{{ route('showClassInformation') }}",{academic_id:academic_id},function(data){
+       {
+         //var data = $('#frm-create-class').serialize();
 
-          $('#add-class-info').empty().append(data);
-          MergeCommonRows($('#table-class-info'));
-        })
-      }
+
+         $.get("{{ route('showClassInformation') }}",{academic_id:academic_id},function(data){
+           $('#add-class-info').empty().append(data);
+           MergeCommonRows($('#table-class-info'));
+         })
+       }
 
     //===============Group modal============================
     $('#frm-group-create').on('submit',function(e){
@@ -280,6 +282,11 @@ function MergeCommonRows(table){
 
 
 //===========оюутаны скрипт=================
+//-----------popup--------------------------
+$('#show-class-info').on('click',function(e){
+    e.preventDefault();
+    $('#choose-academic').modal('show');
+})
 
  //-----------browse photo------------------
  $('#browse_file').on('click',function(){
