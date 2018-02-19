@@ -91,26 +91,28 @@ fieldset legend {
     <b><i class="fa fa-apple"></i> Student Information</b>
   </div>
   <div class="panel-body" style="padding-bottom:4px;">
-    <form action="{{ route('postStudentRegister') }}" method="POST" id="frm-create-student">
+    <form action="{{ route('postStudentRegister') }}" method="POST" id="frm-create-student" enctype="multipart/form-data">
       {!! csrf_field() !!}
       <input type="hidden" name="class_id" id="class_id">
+      <input type="hidden" name="user_id" id="user_id" value="{{ Auth::id() }}">
+      <input type="hidden" name="dateregistered" id="dateregistered" value="{{ date('Y-m-d') }}">
       <div class="row">
         <div class="col-lg-9 col-md-9 col-sm-9">
           {{----------First name---------------}}
           <div>
             <div class="col-md-4">
               <div class="form-group">
-                <label for="lastname">
+                <label for="firstname">
                   First name
                 </label>
-                <input type="text" name="last_name" id="last_name" class="form-control" required>
+                <input type="text" name="first_name" id="first_name" class="form-control" required>
               </div>
             </div>
-            {{-------------English-name---------------}}
+            {{-------------Last name---------------}}
             <div class="col-md-4">
               <div class="form-group">
-                <label for="firstname">English Name</label>
-                <input type="text" name="firstname" id="firstname" class="form-control" required>
+                <label for="lastname">Last name</label>
+                <input type="text" name="last_name" id="last_name" class="form-control" required>
               </div>
             </div>
             {{-------------Gender--------------------}}
@@ -158,7 +160,7 @@ fieldset legend {
           <input type="text" name="national_card" id="national_card" class="form-control">
         </div>
       </div>
-      {{-----------Address---------------}}
+      {{-----------Status---------------}}
       <div class="col-md-4">
         <div class="form-group">
           <fieldset>
@@ -211,7 +213,7 @@ fieldset legend {
            <input type="text" name="phone" id="phone" class="form-control">
          </div>
        </div>
-       {{-----------Edmail-------------}}
+       {{-----------Email-------------}}
        <div class="col-md-8">
          <div class="form-group">
            <label for="email">Email</label>
@@ -224,7 +226,7 @@ fieldset legend {
            <table style="margin:0 auto;">
              <thead>
                <tr class="info">
-                 <th class="student-id">00000</th>
+                 <th class="student-id">0000</th>
                </tr>
              </thead>
            <tbody>
@@ -308,6 +310,118 @@ fieldset legend {
 
 @section('scripts')
 
-     @include('layouts.scripts.scripts')
+<script type="text/javascript">
+      showClassInfo();
 
+        $(document).on('click', '#class-edit',function(e){
+          e.preventDefault();
+           $('#class_id').val($(this).data('id'));
+           $('.academic-detail p').text($(this).text());
+           $('#choose-academic').modal('hide');
+        })
+
+            $('#academic_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#program_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#level_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#shift_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#time_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#batch_id').on('change',function(e){
+              showClassInfo();
+            })
+            $('#group_id').on('change',function(e){
+              showClassInfo();
+            })
+            //==========================================
+
+            $("#frm-view-class #program_id").on('change',function(e){
+                    var program_id = $(this).val();
+                    var level = $('#level_id')
+                    $(level).empty();
+                    $.get("{{ route('showLevel')}}",{program_id:program_id},function(data){
+
+                        $.each(data,function(i,l){
+                           $(level).append($("<option/>",{
+                             value : l.level_id,
+                             text : l.level
+                           }))
+                        })
+                      showClassInfo();
+                    })
+            })
+            //-------------------------------------------
+            function showClassInfo()
+             {
+               var data = $('#frm-view-class').serialize();
+                $.get("{{ route('showClassInformation') }}",data,function(data){
+                 $('#add-class-info').empty().append(data);
+                 $('td#hidden').addClass('hidden');
+                $('th#hidden').addClass('hidden');
+                 MergeCommonRows($('#table-class-info'));
+               })
+             }
+            //===========================================
+            $('#show-class-info').on('click',function(e){
+                e.preventDefault();
+                showClassInfo();
+                $('#choose-academic').modal('show');
+
+            })
+
+             //-----------browse photo------------------
+             $('#browse_file').on('click',function(){
+               $('#photo').click();
+
+             })
+             $('#photo').on('change',function(e){
+               showFile(this,'#showPhoto');
+             })
+             //----------------------------------------
+              $('#dob').datepicker({
+                changeMonth:true,
+                changeYear:true,
+                dateFormat:'yy-mm-dd'
+              })
+             //=========================================
+             function showFile(fileInput,img,showName){
+               if (fileInput.files[0]){
+                 var reader = new FileReader();
+                 reader.onload = function(e){
+                   $(img).attr('src', e.target.result);
+                 }
+                 reader.readAsDataURL(fileInput.files[0]);
+               }
+               $(showName).text(fileInput.files[0].name)
+             };
+             //----------------------------------------
+             function MergeCommonRows(table){
+               var firstColumnBrakes = [];
+               $.each(table.find('th'),function(i){
+                 var previous = null, cellToExtend = null, rowspan = 1;
+                 table.find("td:nth-child(" + i + ")").each(function(index, e){
+                   var jthis = $(this), content =jthis.text();
+                   if (previous == content && content !== "" && $.inArray(index, firstColumnBrakes) === -1){
+                     jthis.addClass('hidden');
+                     cellToExtend.attr("rowspan", (rowspan = rowspan+1));
+
+                   }else{
+                     if(1===1) firstColumnBrakes.push(index);
+                     rowspan = 1;
+                     previous = content;
+                     cellToExtend = jthis;
+                   }
+                 });
+               });
+               $('td.hidden').remove();
+             }
+</script>
 @endsection

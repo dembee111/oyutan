@@ -133,7 +133,11 @@
 
               </form>
               {{----------------------}}
-            
+            <div class="panel panel-default">
+               <div class="panel-heading">Class Information</div>
+               <div class="panel-body" id="add-class-info" style="overflow-y:auto; height:250px;">
+               </div>
+               </div>
        </section>
 
 

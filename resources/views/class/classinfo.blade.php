@@ -25,7 +25,7 @@
         <th>Shift</th>
         <th>Time</th>
         <th>Academic Detail</th>
-        <th>Action</th>
+        <th hidden="hidden">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -41,7 +41,7 @@
                   / Group: {{ $c->groups }} / StartDate: {{ date("d-M-y",strtotime( $c->start_date)) }} / EndDate: {{ date("d-M-y",strtotime( $c->end_date)) }}
                </a>
             </td>
-            <td style="vertical-align: middle; width:50px;">
+            <td style="vertical-align: middle; width:50px;" id="hidden">
                 <button value="{{ $c->class_id }}" class="btn btn-danger btn-sm del-class">Устгах</button>
             </td>
           </tr>

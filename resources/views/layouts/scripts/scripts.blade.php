@@ -5,8 +5,29 @@ window.Laravel = {!! json_encode([
     'csrfToken' => csrf_token(),
 ]) !!};
 //=================================================
-   showClassInfo($('#academic_id').val());
-
+   showClassInfo();
+   //=====================================================
+   $('#academic_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#program_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#level_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#shift_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#time_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#batch_id').on('change',function(e){
+     showClassInfo();
+   })
+   $('#group_id').on('change',function(e){
+     showClassInfo();
+   })
     //===============Date picker ===========================
     $('#start_date').datepicker({
           changeMonth:true,
@@ -62,12 +83,12 @@ window.Laravel = {!! json_encode([
        })
 
       //=====================================================
-      function showClassInfo(academic_id)
+      function showClassInfo()
        {
-         //var data = $('#frm-create-class').serialize();
+         var data = $('#frm-create-class').serialize();
 
 
-         $.get("{{ route('showClassInformation') }}",{academic_id:academic_id},function(data){
+         $.get("{{ route('showClassInformation') }}",data,function(data){
            $('#add-class-info').empty().append(data);
            MergeCommonRows($('#table-class-info'));
          })
@@ -171,7 +192,7 @@ window.Laravel = {!! json_encode([
                       text : l.level
                     }))
                  })
-
+               showClassInfo();
              })
      })
 
@@ -282,32 +303,8 @@ function MergeCommonRows(table){
 
 
 //===========оюутаны скрипт=================
-//-----------popup--------------------------
-$('#show-class-info').on('click',function(e){
-    e.preventDefault();
-    $('#choose-academic').modal('show');
-})
+//----------student-popup--------------------------
 
- //-----------browse photo------------------
- $('#browse_file').on('click',function(){
-   $('#photo').click();
-
- })
- $('#photo').on('change',function(e){
-   showFile(this,'#showPhoto');
- })
-
- //=========================================
- function showFile(fileInput,img,showName){
-   if (fileInput.files[0]){
-     var reader = new FileReader();
-     reader.onload = function(e){
-       $(img).attr('src', e.target.result);
-     }
-     reader.readAsDataURL(fileInput.files[0]);
-   }
-   $(showName).text(fileInput.files[0].name)
- };
 
 
 </script>
