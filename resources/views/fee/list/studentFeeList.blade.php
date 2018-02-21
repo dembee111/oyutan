@@ -21,7 +21,9 @@
         </thead>
 
         <tbody id="tbody-student-fee">
+         {{---------------------------}}
 
+         @for($i=0;$i<5;$i++)
           <tr data-id="" id="sfeeId">
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
@@ -44,7 +46,8 @@
           <td colspan="9" class="hiddenRow">
           </td>
         </tr>
-
+        @endfor
+         {{-------------------------}}
       </tbody>
     </table>
   </div>
