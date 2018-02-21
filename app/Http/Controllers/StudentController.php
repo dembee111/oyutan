@@ -72,7 +72,7 @@ class StudentController extends Controller
           {
             $student_id = $st->student_id;
             Status::insert(['student_id'=>$student_id,'class_id'=>$request->class_id]);
-            return back();
+            return redirect()->route('goPayment',['student_id'=>$student_id]);
           }
     }
 }

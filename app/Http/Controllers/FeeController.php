@@ -64,8 +64,8 @@ class FeeController extends Controller
        return $this->payment('fee.payment',$student_id);
 
     }
-    pubic function goPayment($student_id)
+    public function goPayment($student_id)
     {
-         return view($viewName, compact('programs','levels','status','studentfee'))->with('student_id',$student_id);
+         return $this->payment('fee.payment',$student_id);
     }
 }

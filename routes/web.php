@@ -69,6 +69,7 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
           //-----------------------------payment-------------------------------------------------------------------------
             Route::get('/student/show/payment',['as'=>'getPayment','uses'=>'FeeController@getPayment']);
             Route::get('/student/payment',['as'=>'showStudentPayment','uses'=>'FeeController@showStudentPayment']);
+            Route::get('/student/go/to/payment/{student_id}',['as'=>'goPayment','uses'=>'FeeController@goPayment']);
 
        //for Admin
        Route::get('/createUser',function(){
