@@ -14,6 +14,10 @@ use App\MyClass;
 use App\Student;
 use App\Status;
 use App\Fee;
+use App\Transaction;
+use App\StudentFee;
+use App\ReceiptDetail;
+use App\Receipt;
 
 class FeeController extends Controller
 {
@@ -24,7 +28,8 @@ class FeeController extends Controller
     public function student_status($studentId)
 
     {
-      return Status::join('students','students.student_id','=','statuses.student_id')
+      return Status::latest('statuses.status_id')
+                  ->join('students','students.student_id','=','statuses.student_id')
                   ->join('classes','classes.class_id','=','statuses.class_id')
                   ->join('academics','academics.academic_id','=','classes.academic_id')
                   ->join('shifts','shifts.shift_id','=','classes.shift_id')
@@ -32,7 +37,8 @@ class FeeController extends Controller
                   ->join('batches','batches.batch_id','=','classes.batch_id')
                   ->join('groups','groups.group_id','=','classes.group_id')
                   ->join('levels','levels.level_id','=','classes.level_id')
-                  ->join('programs','programs.program_id','=','levels.program_id');
+                  ->join('programs','programs.program_id','=','levels.program_id')
+                  ->where('students.student_id',$studentId);
     }
       public function show_school_fee($level_id)
 
@@ -54,6 +60,7 @@ class FeeController extends Controller
       $programs = Program::where('program_id',$status->program_id)->get();
       $levels = Level::where('program_id',$status->program_id)->get();
       $studentfee = $this->show_school_fee($status->level_id)->first();
+      $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
       return view($viewName, compact('programs','levels','status','studentfee'))->with('student_id',$student_id);
     }

@@ -122,3 +122,6 @@
     </div>
   </div>
   @endsection
+  @section('script')
+        @include('fee.script.calculate')
+  @endsection
