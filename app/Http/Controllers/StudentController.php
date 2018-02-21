@@ -13,7 +13,7 @@ use App\Group;
 use App\MyClass;
 use App\Student;
 use App\Status;
-
+use Auth;
 use File;
 use Storage;
 

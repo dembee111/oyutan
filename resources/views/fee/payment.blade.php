@@ -4,12 +4,12 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="col-md-3">
-            <form action="#" class="search-payment" method="GET">
-              <input class="form-control" name="student_id" placeholder="Student ID" type="text">
+            <form action="{{ route('showStudentPayment') }}" class="search-payment" method="GET">
+              <input class="form-control" name="student_id" value="{{ $student_id }}" placeholder="Student ID" type="text">
             </form>
           </div>
           <div class="col-md-3">
-            <label class="eng-name">Name: <b class="student-name"></b></label>
+            <label class="eng-name">Name: <b class="student-name">{{ $status->first_name." ".$status->last_name }}</b></label>
           </div>
           <div class="col-md-3">
           </div>
@@ -20,16 +20,25 @@
               <label class="invoice-number">Receipt N<sup>0</sup>: <b></b></label>
             </div>
           </div>
+
+            <form action="#" method="POST" id="frmPayment">
           <div class="panel-body">
+
+
             <table style="margin-top: -12px;">
               <caption class="academicDetail">
-
+                {{ $status->program }} /
+                Level: {{ $status->level }} /
+                Shift {{ $status->shift }} /
+                Time: {{ $status->time }} /
+                Batch: {{ $status->batch }} /
+                Group: {{ $status->groups }}
               </caption>
               <thead>
                 <tr>
                   <th>Program</th>
                   <th>Level</th>
-                  <th>School Fee</th>
+                  <th>School Fee($)</th>
                   <th>Amount($)</th>
                   <th>Dis(%)</th>
                   <th>Paid($)</th>
@@ -40,22 +49,31 @@
 
               <tr>
                 <td>
-                  <select id="AcademicID" name="academic_id">
+                  <select id="program_id" name="program_id">
                     <option value="">--------------</option>
+                    @foreach($programs as $key => $p)
+                          <option value="{{ $p->program_id }}" {{ $p->program_id==$status->program_id?
+                          'selected' : null }}>{{ $p->program }}</option>
+                    @endforeach
                   </select>
                 </td>
                 <td>
-                  <select>
+                  <select id="level">
                     <option value="">--------------</option>
+                    @foreach($levels as $key => $l)
+                          <option value="{{ $l->level_id }}" {{ $l->level_id==$status->level_id?
+                          'selected' : null  }}>{{ $l->level }}</option>
+                    @endforeach
                   </select>
                 </td>
                 <td>
-                  <input type="text" name="fee" id="Fee" readonly="true">
+                  <input type="text" name="fee" value="{{ $studentfee->amount or null }}" id="Fee" readonly="true">
                   <input type="hidden" name="fee_id" id="FeeID">
                   <input type="hidden" name="student_id" id="FeeID">
                   <input type="hidden" name="level_id" id="level_id">
                   <input type="hidden" name="user_id" id="UserID">
                   <input type="hidden" name="transacdate" id="TransacDate">
+                  <input type="hidden" name="s_fee_id">
                 </td>
                 <td>
                   <input type="text" name="amount" id="Amount" required>
@@ -68,7 +86,7 @@
                 </td>
 
                 <td>
-                  <input type="text" name="balance" id="Balance" required>
+                  <input type="text" name="balance" id="Balance" disabled>
                 </td>
               </tr>
 
@@ -92,7 +110,15 @@
 
         </table>
       </div>
-      <div class="panel-footer" style="height: 40px;"></div>
+      <div class="panel-footer">
+          <input type="submit" id="btn-go" name="btn-go" class="btn btn-default btn-payment">
+          <input type="button" onclick="this.form.reset()" class="btn btn-default btn-reset pull-right" value="Reset">
+
+      </div>
+
+    </form>
+
+
     </div>
   </div>
   @endsection
