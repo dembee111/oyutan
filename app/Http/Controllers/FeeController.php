@@ -76,4 +76,9 @@ class FeeController extends Controller
     {
          return $this->payment('fee.payment',$student_id);
     }
+    public function savePayment(Request $request)
+
+    {
+         return $request->all();
+    }
 }
