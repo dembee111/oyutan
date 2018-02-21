@@ -65,6 +65,10 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
           Route::get('/student/getregister',['as'=>'getStudentRegister','uses'=>'StudentController@getStudentRegister']);
 
           Route::post('/student/postregister',['as'=>'postStudentRegister','uses'=>'StudentController@postStudentRegister']);
+
+          //-----------------------------payment-------------------------------------------------------------------------
+            Route::get('/student/show/payment',['as'=>'getPayment','uses'=>'FeeController@getPayment']);
+
        //for Admin
        Route::get('/createUser',function(){
          echo 'this for admin test';
