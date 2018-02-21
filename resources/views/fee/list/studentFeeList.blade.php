@@ -31,7 +31,6 @@
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
-
             <td style="text-align:center; width:115px;">
               <a href="#" class="btn btn-success btn-xs btn-sfee-edit" title="Edit"><i class="fa fa-edit"></i></a>
 

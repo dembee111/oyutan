@@ -121,6 +121,7 @@
 
 
     </div>
+    @include('fee.list.studentFeeList')
   </div>
   @endsection
   @section('scripts')
