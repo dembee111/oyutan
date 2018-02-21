@@ -17,7 +17,7 @@
               <label class="date-invoice">Date : <b>{{ date('d-M-Y') }}</b></label>
             </div>
             <div class="col-md-3" style="text-align:right;">
-              <label class="invoice-number">Receipt N<sup>0</sup>: <b>{{ sprint('%05d', $receipt_id) }}</b></label>
+              <label class="invoice-number">Receipt N<sup>0</sup>: <b>{{ sprintf('%05d', $receipt_id) }}</b></label>
             </div>
           </div>
 
