@@ -86,7 +86,7 @@
                 </td>
 
                 <td>
-                  <input type="text" name="balance" id="Balance" disabled>
+                  <input type="text" name="lack" id="Lack" disabled>
                 </td>
               </tr>
 
