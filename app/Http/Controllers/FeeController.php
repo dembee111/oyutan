@@ -79,6 +79,20 @@ class FeeController extends Controller
     public function savePayment(Request $request)
 
     {
-         return $request->all();
+        $studentFee = StudentFee::create($request->all());
+        $transact = Transaction::create(['transact_date'=>$request->transact_date,
+                                         'fee_id'=>$request->fee_id,
+                                         'user_id'=>$request->user_id,
+                                         'student_id'=>$request->student_id,
+                                         's_fee_id'=>$studentFee->s_fee_id,
+                                         'paid'=>$request->paid,
+                                         'remark'=>$request->remark,
+                                         'description'=>$request->description]);
+        $receipt_id = Receipt::autoNumber();
+        ReceiptDetail::create(['receipt_id'=>$receipt_id,
+                               'student_id'=>$request->student_id,
+                               'transact_id'=>$transact->transact_id]);
+                               return back();
+
     }
 }

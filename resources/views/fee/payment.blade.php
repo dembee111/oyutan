@@ -21,7 +21,8 @@
             </div>
           </div>
 
-            <form action="#" method="POST" id="frmPayment">
+            <form action="{{ route('savePayment') }}" method="POST" id="frmPayment">
+              {{ csrf_field() }}
           <div class="panel-body">
 
 
@@ -68,12 +69,12 @@
                 </td>
                 <td>
                   <input type="text" name="fee" value="{{ $studentfee->amount or null }}" id="Fee" readonly="true">
-                  <input type="hidden" name="fee_id" id="FeeID">
-                  <input type="hidden" name="student_id" id="FeeID">
-                  <input type="hidden" name="level_id" id="level_id">
-                  <input type="hidden" name="user_id" id="UserID">
-                  <input type="hidden" name="transacdate" id="TransacDate">
-                  <input type="hidden" name="s_fee_id">
+                  <input type="hidden" name="fee_id" value="{{ $studentfee->fee_id }}" id="FeeID">
+                  <input type="hidden" name="student_id" value="{{ $student_id }}" id="StudentID">
+                  <input type="hidden" name="level_id" value="{{ $status->level_id }}" id="LevelID">
+                  <input type="hidden" name="user_id" value="{{ Auth::id() }}" id="UserID">
+                  <input type="hidden" name="transact_date" value="{{ date('Y-m-d H:i:s')}}" id="TransacDate">
+                  <input type="hidden" name="s_fee_id" id="s_fee_id">
                 </td>
                 <td>
                   <input type="text" name="amount" id="Amount" required>

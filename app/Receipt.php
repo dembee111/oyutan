@@ -20,7 +20,7 @@ class Receipt extends Model
           Receipt::insert(['receipt_id'=>$id]);
         }else{
           $id = 1;
-          Receipt::insert(['receipt_id'=>$id])
+          Receipt::insert(['receipt_id'=>$id]);
         }
         return $id;
       }
