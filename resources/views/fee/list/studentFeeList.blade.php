@@ -44,10 +44,12 @@
         </tr>
         <tr>
           <td colspan="9" class="hiddenRow">
+             @include('fee.list.transactionList')
           </td>
         </tr>
         @endfor
          {{-------------------------}}
+
       </tbody>
     </table>
   </div>
