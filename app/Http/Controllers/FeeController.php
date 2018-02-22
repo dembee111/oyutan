@@ -57,6 +57,13 @@ class FeeController extends Controller
             return StudentFee::join('fees','fees.fee_id','=','studentfees.fee_id')
                              ->join('students','students.student_id','=','studentfees.student_id')
                              ->join('levels','levels.level_id','=','studentfees.level_id')
+                             ->select('levels.level_id',
+                                      'levels.level',
+                                      'fees.amount as school_fee',
+                                      'students.student_id',
+                                      'studentfees.s_fee_id',
+                                      'studentfees.amount as student_amount',
+                                      'studentfees.discount')
                              ->where('students.student_id',$student_id);
 
     }

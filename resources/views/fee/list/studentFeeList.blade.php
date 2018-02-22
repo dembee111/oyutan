@@ -23,13 +23,14 @@
         <tbody id="tbody-student-fee">
          {{---------------------------}}
 
-         @for($i=0;$i<3;$i++)
+        @foreach($readStudentFee as $key => $sf)
+
           <tr data-id="" id="sfeeId">
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
+            <td style="text-align: center;">{{ $key+1 }}</td>
+            <td style="text-align: center;">{{ $sf->level }}</td>
+            <td style="text-align: center;">$ {{ number_format($sf->school_fee,2) }}</td>
+            <td style="text-align: center;">$ {{ number_format($sf->student_amount,2) }}</td>
+            <td style="text-align: center;">{{ $sf->discount }}%</td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
             <td style="text-align: center;"></td>
@@ -37,7 +38,7 @@
               <a href="#" class="btn btn-success btn-xs btn-sfee-edit" title="Edit"><i class="fa fa-edit"></i></a>
 
               <button type="button" class="btn btn-danger btn-xs btn-paid"><i class="fa fa-usd" title="Complete"></i></button>
-              <button class="btn btn-primary btn-xs accordion-toggle" data-toggle="collapse" data-target="#demo{{$i}}"
+              <button class="btn btn-primary btn-xs accordion-toggle" data-toggle="collapse" data-target="#demo{{$key}}"
               title="Partial"><span class="fa fa-eye"></span></button>
             </td>
 
@@ -47,7 +48,7 @@
              @include('fee.list.transactionList')
           </td>
         </tr>
-        @endfor
+        @endforeach
          {{-------------------------}}
 
       </tbody>
