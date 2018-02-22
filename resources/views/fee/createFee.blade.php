@@ -27,6 +27,9 @@
                   <td><label>Fee Type</label></td>
                   <td>
                     <select class="form-control" id="fee_type_id" name="fee_type_id" disabled>
+                      @foreach($feetypes as $key => $ft)
+                              <option value="{{ $ft->fee_type_id }}">{{ $ft->fee_type }}</option>
+                      @endforeach
                     </select>
                   </td>
                 </tr>
@@ -40,30 +43,31 @@
                 <tr>
                   <td>Academic Year</td>
                   <td>
-                    <select id="academic_id" name="academic_id" class="form-control" disabled>
-                    </select>
+                        <input type="text" value="{{ $status->academic }}" disabled>
+                        <input type="hidden" name="academic_id" value="{{ $status->academic_id }}">
                   </td>
                 </tr>
 
                 <tr>
                   <td>Program</td>
                   <td>
-                    <input type="text" disabled>
+                    <input type="text" value="{{ $status->program }}" disabled>
+
                   </td>
                 </tr>
 
                 <tr>
                   <td>Level</td>
                   <td>
-                    <input type="text" disabled>
-                    <input type="hidden" name="level_id">
+                    <input type="text" value="{{ $status->level }}" disabled>
+                    <input type="hidden" name="level_id" value="{{ $status->level_id }}">
                   </td>
                 </tr>
 
                 <tr>
                   <td>School Fee($)</td>
                   <td>
-                    <input type="text" name="amount" class="form-control" id="amont" placeholder="Amount">
+                    <input type="text" name="amount" class="form-control" id="amont" autocomplete="off" placeholder="Amount" required>
                   </td>
                 </tr>
 
@@ -84,16 +88,3 @@
     </div>
     </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    

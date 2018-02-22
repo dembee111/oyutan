@@ -18,6 +18,7 @@ use App\Transaction;
 use App\StudentFee;
 use App\ReceiptDetail;
 use App\Receipt;
+use App\Feetype;
 use DB;
 
 class FeeController extends Controller
@@ -96,7 +97,7 @@ class FeeController extends Controller
 
     public function payment($viewName,$student_id)
     {
-
+              $feetypes = FeeType::all();
               $status = $this->student_status($student_id)->first();
               $programs = Program::where('program_id',$status->program_id)->get();
               $levels = Level::where('program_id',$status->program_id)->get();
@@ -110,7 +111,8 @@ class FeeController extends Controller
                                             'status','studentfee',
                                             'receipt_id',
                                             'readStudentFee',
-                                            'readStudentTransaction'))->with('student_id',$student_id);
+                                            'readStudentTransaction',
+                                            'feetypes'))->with('student_id',$student_id);
     }
 
     public function showStudentPayment(Request $request)
@@ -141,5 +143,12 @@ class FeeController extends Controller
                                'transact_id'=>$transact->transact_id]);
                                return back();
 
+    }
+    public function createFee(Request $request)
+    {
+      if($request->all())
+      {
+        return response($request->all());
+      }
     }
 }
