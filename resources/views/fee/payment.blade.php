@@ -101,10 +101,10 @@
           <tbody>
             <tr>
               <td colspan="2">
-                <input type="text" name="description" id="description">
+                <input type="text" name="remark" id="remark">
               </td>
               <td colspan="5">
-                <input type="text" name="remark" id="remark">
+                <input type="text" name="description" id="description">
               </td>
             </tr>
           </tbody>
