@@ -38,7 +38,7 @@
               <a href="#" class="btn btn-success btn-xs btn-sfee-edit" title="Edit"><i class="fa fa-edit"></i></a>
 
               <button type="button" class="btn btn-danger btn-xs btn-paid"><i class="fa fa-usd" title="Complete"></i></button>
-              <button class="btn btn-primary btn-xs accordion-toggle" data-toggle="collapse" data-target="#demo{{$key}}"
+              <button class="btn btn-primary btn-xs accordian-toggle" data-toggle="collapse" data-target="#demo{{$key}}"
               title="Partial"><span class="fa fa-eye"></span></button>
             </td>
 

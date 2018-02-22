@@ -76,7 +76,7 @@ class FeeController extends Controller
                               ->join('transactions','transactions.transact_id','=','receiptdetails.transact_id')
                               ->join('fees','fees.fee_id','=','transactions.fee_id')
                               ->join('users','users.id','=','transactions.user_id')
-                              ->where('students.students',$student_id);
+                              ->where('students.student_id',$student_id);
 
     }
 
@@ -89,11 +89,14 @@ class FeeController extends Controller
               $levels = Level::where('program_id',$status->program_id)->get();
               $studentfee = $this->show_school_fee($status->level_id)->first();
               $readStudentFee = $this->read_student_fee($student_id)->get();
-              $readStudentTransaction = $this->read_student_transaction($student_id);
+              $readStudentTransaction = $this->read_student_transaction($student_id)->get();
               $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
               return view($viewName, compact('programs','levels',
-                                            'status','studentfee','receipt_id','readStudentFee'))->with('student_id',$student_id);
+                                            'status','studentfee',
+                                            'receipt_id',
+                                            'readStudentFee',
+                                            'readStudentTransaction'))->with('student_id',$student_id);
     }
 
     public function showStudentPayment(Request $request)
