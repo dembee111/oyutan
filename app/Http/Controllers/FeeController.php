@@ -52,18 +52,28 @@ class FeeController extends Controller
 
       }
 
+    public function readStudentFee($student_id)
+    {
+            return StudentFee::join('fees','fees.fee_id','=','studentfees.fee_id')
+                             ->join('students','students.student_id','=','studentfees.student_id')
+                             ->join('levels','levels.level_id','=','studentfees.level_id')
+                             ->where('students.student_id',$student_id);
+
+    }
+
 
     public function payment($viewName,$student_id)
     {
 
-      $status = $this->student_status($student_id)->first();
-      $programs = Program::where('program_id',$status->program_id)->get();
-      $levels = Level::where('program_id',$status->program_id)->get();
-      $studentfee = $this->show_school_fee($status->level_id)->first();
-      $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
+              $status = $this->student_status($student_id)->first();
+              $programs = Program::where('program_id',$status->program_id)->get();
+              $levels = Level::where('program_id',$status->program_id)->get();
+              $studentfee = $this->show_school_fee($status->level_id)->first();
+              $readStudentFee = $this->readStudentFee($student_id)->get();
+              $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
-      return view($viewName, compact('programs','levels',
-                                    'status','studentfee','receipt_id'))->with('student_id',$student_id);
+              return view($viewName, compact('programs','levels',
+                                            'status','studentfee','receipt_id','readStudentFee'))->with('student_id',$student_id);
     }
 
     public function showStudentPayment(Request $request)
