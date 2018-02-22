@@ -89,6 +89,7 @@ class FeeController extends Controller
               $levels = Level::where('program_id',$status->program_id)->get();
               $studentfee = $this->show_school_fee($status->level_id)->first();
               $readStudentFee = $this->read_student_fee($student_id)->get();
+              $readStudentTransaction = $this->read_student_transaction($student_id);
               $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
               return view($viewName, compact('programs','levels',
