@@ -10,8 +10,10 @@
          enableFormElement(this);
          var data =$(this).serialize();
          var url =$(this).attr('action');
+         $.post(url,data,function(data){
+           location.reload();
+         })
 
-         console.log(data)
        })
 
        //-------------------enable form element---------------

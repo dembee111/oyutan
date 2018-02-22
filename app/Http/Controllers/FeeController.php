@@ -146,9 +146,10 @@ class FeeController extends Controller
     }
     public function createFee(Request $request)
     {
-      if($request->all())
+      if($request->ajax())
       {
-        return response($request->all());
+        $fee = Fee::create($request->all());
+        return response($fee);
       }
     }
 }

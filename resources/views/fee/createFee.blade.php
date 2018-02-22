@@ -17,7 +17,8 @@
           <b><i class="glyphicon glyphicon-apple"></i>Create School Fee</b>
         </div>
         {{-------------------}}
-        <form action="#" method="POST" id="frmFee">
+        <form action="{{ route('createFee') }}" method="POST" id="frmFee">
+          {{ csrf_field() }}
           <div class="panel body">
             <div class="table-responsive">
 
