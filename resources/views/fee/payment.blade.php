@@ -22,7 +22,7 @@
             </div>
           </div>
 
-            <form action="{{ route('savePayment') }}" method="POST" id="frmPayment">
+            <form action="{{ count($readStudentFee) !=0 ? route('exstraPay') : route('savePayment') }}" method="POST" id="frmPayment">
               {{ csrf_field() }}
           <div class="panel-body">
 
@@ -51,7 +51,7 @@
 
               <tr>
                 <td>
-                  <select id="program_id" name="program_id">
+                  <select id="program_id" name="program_id" class="d">
                     <option value="">--------------</option>
                     @foreach($programs as $key => $p)
                           <option value="{{ $p->program_id }}" {{ $p->program_id==$status->program_id?
@@ -60,7 +60,7 @@
                   </select>
                 </td>
                 <td>
-                  <select id="level">
+                  <select id="Level_ID" class="d">
                     <option value="">--------------</option>
                     @foreach($levels as $key => $l)
                           <option value="{{ $l->level_id }}" {{ $l->level_id==$status->level_id?
@@ -83,17 +83,17 @@
                   <input type="hidden" name="s_fee_id" id="s_fee_id">
                 </td>
                 <td>
-                  <input type="text" name="amount" id="Amount" required>
+                  <input type="text" name="amount" id="Amount" required class="d">
                 </td>
                 <td>
-                  <input type="text" name="discount" id="Discount">
+                  <input type="text" name="discount" id="Discount" class="d">
                 </td>
                 <td>
                   <input type="text" name="paid" id="Paid" required>
                 </td>
 
                 <td>
-                  <input type="text" name="lack" id="Lack" disabled>
+                  <input type="text" name="lack" id="Lack" >
                 </td>
               </tr>
 
@@ -118,7 +118,8 @@
         </table>
       </div>
       <div class="panel-footer">
-          <input type="submit" id="btn-go" name="btn-go" class="btn btn-default btn-payment">
+          <input type="submit" id="btn-go" name="btn-go" class="btn btn-default btn-payment"
+          value="{{ count($readStudentFee)!=0 ? 'Exstra Pay' : 'Save' }}">
           <input type="button" onclick="this.form.reset()" class="btn btn-default btn-reset pull-right" value="Reset">
 
       </div>
@@ -129,6 +130,7 @@
     </div>
     @if(count($readStudentFee)!=0)
               @include('fee.list.studentFeeList')
+              <input type="hidden" value="0" id="disabled">
     @endif
   </div>
   @endsection
