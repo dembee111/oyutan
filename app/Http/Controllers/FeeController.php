@@ -52,11 +52,12 @@ class FeeController extends Controller
 
       }
 
-    public function readStudentFee($student_id)
+    public function read_student_fee($student_id)
     {
             return StudentFee::join('fees','fees.fee_id','=','studentfees.fee_id')
                              ->join('students','students.student_id','=','studentfees.student_id')
                              ->join('levels','levels.level_id','=','studentfees.level_id')
+                             ->join('programs','programs.program_id','=','levels.program_id')
                              ->select('levels.level_id',
                                       'levels.level',
                                       'fees.amount as school_fee',
@@ -68,6 +69,17 @@ class FeeController extends Controller
 
     }
 
+    public function read_student_transaction($student_id)
+    {
+          return ReceiptDetail::join('receipts','receipts.receipt_id','receiptdetails.receipt_id')
+                              ->join('students','students.student_id','=','receiptdetails.student_id')
+                              ->join('transactions','transactions.transact_id','=','receiptdetails.transact_id')
+                              ->join('fees','fees.fee_id','=','transactions.fee_id')
+                              ->join('users','users.id','=','transactions.user_id')
+                              ->where('students.students',$student_id);
+
+    }
+
 
     public function payment($viewName,$student_id)
     {
@@ -76,7 +88,7 @@ class FeeController extends Controller
               $programs = Program::where('program_id',$status->program_id)->get();
               $levels = Level::where('program_id',$status->program_id)->get();
               $studentfee = $this->show_school_fee($status->level_id)->first();
-              $readStudentFee = $this->readStudentFee($student_id)->get();
+              $readStudentFee = $this->read_student_fee($student_id)->get();
               $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
               return view($viewName, compact('programs','levels',
