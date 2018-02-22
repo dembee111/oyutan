@@ -127,7 +127,9 @@
 
 
     </div>
-    @include('fee.list.studentFeeList')
+    @if(count($readStudentFee)!=0)
+              @include('fee.list.studentFeeList')
+    @endif
   </div>
   @endsection
   @section('scripts')

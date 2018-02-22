@@ -25,5 +25,14 @@
               $(element).attr('disabled',false);
          })
        }
+       //-------------------------------------------------
+       $('.btn-paid').on('click',function(e){
+         e.preventDefault();
+         s_fee_id = $(this).data('id-paid');
+         balance = $(this).val();
+         $.get("{{ route('pay') }}",{s_fee_id:s_fee_id},function(data){
+                console.log(data);
+         })
+       })
 
 </script>
