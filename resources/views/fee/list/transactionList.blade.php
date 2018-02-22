@@ -1,4 +1,4 @@
-<div class="accordion-body collapse" id="demo1">
+<div class="accordion-body collapse" id="demo{{ $i }}">
       <table>
         <thead>
             <tr>
