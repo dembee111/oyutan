@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
 @include('fee.stylesheet.css-payment')
+@include('fee.createFee')
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="col-md-3">
@@ -68,7 +69,12 @@
                   </select>
                 </td>
                 <td>
+                  <div class="input-group">
+                    <span class="input-group-addon create-fee" title="create fee" style="cursor:pointer;color:blue;
+                    padding:0px 3px; border-right:none; ">($)</span>
+
                   <input type="text" name="fee" value="{{ $studentfee->amount or null }}" id="Fee" readonly="true">
+                </div>
                   <input type="hidden" name="fee_id" value="{{ $studentfee->fee_id or null }}" id="FeeID">
                   <input type="hidden" name="student_id" value="{{ $student_id }}" id="StudentID">
                   <input type="hidden" name="level_id" value="{{ $status->level_id }}" id="LevelID">
@@ -126,4 +132,5 @@
   @endsection
   @section('scripts')
         @include('fee.script.calculate')
+        @include('fee.script.payment')
   @endsection
