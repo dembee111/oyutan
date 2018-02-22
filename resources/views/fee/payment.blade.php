@@ -69,7 +69,7 @@
                 </td>
                 <td>
                   <input type="text" name="fee" value="{{ $studentfee->amount or null }}" id="Fee" readonly="true">
-                  <input type="hidden" name="fee_id" value="{{ $studentfee->fee_id }}" id="FeeID">
+                  <input type="hidden" name="fee_id" value="{{ $studentfee->fee_id or null }}" id="FeeID">
                   <input type="hidden" name="student_id" value="{{ $student_id }}" id="StudentID">
                   <input type="hidden" name="level_id" value="{{ $status->level_id }}" id="LevelID">
                   <input type="hidden" name="user_id" value="{{ Auth::id() }}" id="UserID">

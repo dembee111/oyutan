@@ -31,9 +31,13 @@
             <td style="text-align: center;">$ {{ number_format($sf->school_fee,2) }}</td>
             <td style="text-align: center;">$ {{ number_format($sf->student_amount,2) }}</td>
             <td style="text-align: center;">{{ $sf->discount }}%</td>
-            <td style="text-align: center;">$ {{ number_format($readStudentTransaction->where('s_fee_id',$sf->s_fee_id)->sum('paid'),2) }}</td>
-            <td style="text-align: center;"></td>
-            <td style="text-align: center;"></td>
+            <td style="text-align: center;">
+              $ {{ number_format($readStudentTransaction->where('s_fee_id',$sf->s_fee_id)->sum('paid'),2) }}
+            </td>
+            <td style="text-align: center;">
+                $ {{ number_format($sf->student_amount-$readStudentTransaction->where('s_fee_id',$sf->s_fee_id)->sum('paid')) }}
+            </td>
+
             <td style="text-align:center; width:115px;">
               <a href="#" class="btn btn-success btn-xs btn-sfee-edit" title="Edit"><i class="fa fa-edit"></i></a>
 

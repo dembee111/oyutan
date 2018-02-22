@@ -18,6 +18,7 @@ use App\Transaction;
 use App\StudentFee;
 use App\ReceiptDetail;
 use App\Receipt;
+use DB;
 
 class FeeController extends Controller
 {
@@ -79,6 +80,18 @@ class FeeController extends Controller
                               ->where('students.student_id',$student_id);
 
     }
+    /*public function total_transaction($student_id)
+    {
+              return ReceiptDetail::join('receipts','receipts.receipt_id','receiptdetails.receipt_id')
+                                  ->join('students','students.student_id','=','receiptdetails.student_id')
+                                  ->join('transactions','transactions.transact_id','=','receiptdetails.transact_id')
+                                  ->join('fees','fees.fee_id','=','transactions.fee_id')
+                                  ->join('users','users.id','=','transactions.user_id')
+                                  ->select(DB::raw('SUM(transactions.paid)As total_transaction'))
+                                  ->where('students.student_id',$student_id)
+                                  ->groupBy('transactions.s_fee_id');
+
+    } */
 
 
     public function payment($viewName,$student_id)
@@ -90,6 +103,7 @@ class FeeController extends Controller
               $studentfee = $this->show_school_fee($status->level_id)->first();
               $readStudentFee = $this->read_student_fee($student_id)->get();
               $readStudentTransaction = $this->read_student_transaction($student_id)->get();
+              /*$ts = $this->total_transaction($student_id)->get();*/
               $receipt_id = ReceiptDetail::where('student_id',$student_id)->max('receipt_id');
 
               return view($viewName, compact('programs','levels',
