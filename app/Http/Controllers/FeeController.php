@@ -235,9 +235,10 @@ class FeeController extends Controller
                                                         " / ",classes.end_date
                                                         )As detail'))
                                        ->first();
+              $studentFee = StudentFee::where('s_fee_id',$invoice->s_fee_id)->first();
               $totalPaid = Transaction::where('s_fee_id',$invoice->s_fee_id)->sum('paid');
 
-            return view('invoice.invoice',compact('invoice','status','totalPaid'));
+            return view('invoice.invoice',compact('invoice','status','totalPaid','studentFee'));
 
 
     }
