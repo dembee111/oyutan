@@ -74,7 +74,7 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::post('/fee/create',['as'=>'createFee','uses'=>'FeeController@createFee']);
             Route::get('/fee/student/pay',['as'=>'pay','uses'=>'FeeController@pay']);
             Route::post('/fee/student/exstray/pay',['as'=>'exstraPay','uses'=>'FeeController@exstraPay']);
-
+            Route::get('/fee/student/print/invoice/{receiptId}',['as'=>'printInvoice','uses'=>'FeeController@printInvoice']);
        //for Admin
        Route::get('/createUser',function(){
          echo 'this for admin test';
