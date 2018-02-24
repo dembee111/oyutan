@@ -24,7 +24,7 @@
        {
          $.each($(frmName).find('input,select'),function(i,element){
 
-              $(element).attr('disabled',false);
+              $(element).attr('disabled',false).css({'background':'#fff','border':'1px solid #ccc'});
          })
        }
        //-------------------------------------------------
@@ -48,6 +48,23 @@
                 $('$b').val(balance);
          })
        })
+       //----------------------------------------------------
+        $('.btn-reset').on('click',function(e){
+          e.preventDefault();
+          var caption = $(this).val();
+          if (caption=="Reset")
+          {
+            $(this).val('Cancel');
+            $('#btn-go').val('Save');
+            $('#Pay').attr('id','Paid');
+            $('#frmPayment').attr('action',"{{ route('savePayment') }}");
+            enableFormElement('#frmPayment');
+            return;
+
+          }
+          location.reload();
+        })
+
        //----------------------------------------------------
        function disabled_input()
        {

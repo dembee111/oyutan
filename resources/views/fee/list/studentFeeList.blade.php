@@ -10,7 +10,8 @@
 
           <tr>
                   <th style="text-align: center;">N<sup>0</sup></th>
-                  <th>Level</th>
+                  <th style="text-align: center;">Program</th>
+                  <th style="text-align: center;">Level</th>
                   <th style="text-align: center; ">Fee</th>
                   <th style="text-align: center; ">Amount</th>
                   <th style="text-align: center; ">Discount</th>
@@ -27,6 +28,7 @@
 
           <tr data-id="" id="sfeeId">
             <td style="text-align: center;">{{ $key+1 }}</td>
+            <td style="text-align: center;">{{ $sf->program }}</td>
             <td style="text-align: center;">{{ $sf->level }}</td>
             <td style="text-align: center;">$ {{ number_format($sf->school_fee,2) }}</td>
             <td style="text-align: center;">$ {{ number_format($sf->student_amount,2) }}</td>
