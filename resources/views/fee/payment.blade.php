@@ -60,7 +60,7 @@
                   </select>
                 </td>
                 <td>
-                  <select id="Level_ID" class="d">
+                  <select id="Level_ID" name="level_id" class="d">
                     <option value="">--------------</option>
                     @foreach($levels as $key => $l)
                           <option value="{{ $l->level_id }}" {{ $l->level_id==$status->level_id?

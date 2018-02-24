@@ -27,6 +27,7 @@ class FeeController extends Controller
     {
       return view('fee.searchPayment');
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public function student_status($studentId)
 
     {
@@ -42,6 +43,7 @@ class FeeController extends Controller
                   ->join('programs','programs.program_id','=','levels.program_id')
                   ->where('students.student_id',$studentId);
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       public function show_school_fee($level_id)
 
       {
@@ -53,6 +55,7 @@ class FeeController extends Controller
                      ->orderby('fees.amount','DESC');
 
       }
+      //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function read_student_fee($student_id)
     {
@@ -72,6 +75,7 @@ class FeeController extends Controller
                              ->orderBy('studentfees.s_fee_id','ASC');
 
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function read_student_transaction($student_id)
     {
@@ -83,6 +87,7 @@ class FeeController extends Controller
                               ->where('students.student_id',$student_id);
 
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     /*public function total_transaction($student_id)
     {
               return ReceiptDetail::join('receipts','receipts.receipt_id','receiptdetails.receipt_id')
@@ -96,7 +101,7 @@ class FeeController extends Controller
 
     } */
 
-
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public function payment($viewName,$student_id)
     {
               $feetypes = FeeType::all();
@@ -116,6 +121,7 @@ class FeeController extends Controller
                                             'readStudentTransaction',
                                             'feetypes'))->with('student_id',$student_id);
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function showStudentPayment(Request $request)
     {
@@ -123,10 +129,13 @@ class FeeController extends Controller
        return $this->payment('fee.payment',$student_id);
 
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public function goPayment($student_id)
     {
          return $this->payment('fee.payment',$student_id);
     }
+
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public function savePayment(Request $request)
 
     {
@@ -146,6 +155,9 @@ class FeeController extends Controller
                                return back();
 
     }
+
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
     public function createFee(Request $request)
     {
       if($request->ajax())
@@ -154,6 +166,7 @@ class FeeController extends Controller
         return response($fee);
       }
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function pay(Request $request)
     {
@@ -164,7 +177,9 @@ class FeeController extends Controller
                   ->join('fees','fees.fee_id','=','studentfees.fee_id')
                   ->join('students','students.student_id','=','studentfees.student_id')
                   ->select('levels.level_id',
+                           'levels.level',
                            'programs.program_id',
+                           'programs.program',
                            'fees.fee_id',
                            'students.student_id',
                            'studentfees.s_fee_id',
@@ -178,6 +193,7 @@ class FeeController extends Controller
 
       }
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function exstraPay(Request $request)
     {
@@ -192,6 +208,7 @@ class FeeController extends Controller
          return back();
        }
     }
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
     public function printInvoice($receipt_id)
     {
@@ -246,6 +263,9 @@ class FeeController extends Controller
 
 
     }
+
+    //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+    
     public function createStudentLevel()
     {
       Status::insert(['student_id'=>34, 'class_id'=>1]);
