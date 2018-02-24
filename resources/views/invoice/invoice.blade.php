@@ -100,6 +100,7 @@
        <div class="div-button"><button onclick="printContent('divide')">Print</button></div>
 
        <div id="divide">
+         <?php for($i=0;$i<2;$i++) {?>
          <div id="container">
            <div class="lenghth-limit">
              {{-----------------}}
@@ -210,16 +211,43 @@
                   </tr>
                 </table>
               </div>
-              <br><br><br><br><br><br>
+              <br><br><br><br>
               {{------------------------------}}
               <table>
                 <tr>
-                  <td style="font-size:10px;text-align">
+                  <td style="font-size:12px;text-align:center; ">
+                    Улаанбаатар хот, ХУД, 4-р хороо, Вива сити хотхон
+                  </td>
+                </tr>
+                  <tr>
+                    <td style="font-size:12px;text-align:center; ">
+                      Утас: 11365184 Мэйл: minion.ck@gmail.com
+                    </td>
+
+                  </tr>
               </table>
               {{------------------------------}}
          </div>
-
+         @if ($i==0)
+         <br>
+         <hr>
+         @endif
+      <?php }?>
        </div>
+
+       {{-------------------------------}}
+
+        <script type="text/javascript">
+
+                  function printContent(el){
+                    var restorepage = document.body.innerHTML;
+                    var printcontent = document.getElementById(el).innerHTML;
+                    document.body.innerHTML = printcontent;
+                    window.print();
+                    document.body.innerHTML = restorepage;
+                    window.close();
+                  }
+        </script>
 
 </body>
 </html>
