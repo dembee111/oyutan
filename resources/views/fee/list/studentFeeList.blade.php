@@ -37,7 +37,7 @@
               $ {{ number_format($readStudentTransaction->where('s_fee_id',$sf->s_fee_id)->sum('paid'),2) }}
               <input type="hidden" name="b" id="b">
             </td>
-            <td style="text-align: center;">
+            <td style="text-align: center; color:red; font-weight:bold;">
                 $ {{ number_format($sf->student_amount-$readStudentTransaction->where('s_fee_id',$sf->s_fee_id)->sum('paid'),2) }}
             </td>
 

@@ -75,7 +75,8 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::get('/fee/student/pay',['as'=>'pay','uses'=>'FeeController@pay']);
             Route::post('/fee/student/exstray/pay',['as'=>'exstraPay','uses'=>'FeeController@exstraPay']);
             Route::get('/fee/student/print/invoice/{receiptId}',['as'=>'printInvoice','uses'=>'FeeController@printInvoice']);
-
+            Route::get('/fee/student/transaction/delete{transactId}',['as'=>'deleteTransact', 'uses'=>'FeeController@deleteTransact']);
+            Route::get('/fee/student/show/level',['as'=>'showLevelStudent', 'uses'=>'FeeController@showLevelStudent']);
 
             //route test
             Route::get('/create/student/level',['as'=>'createStudentLevel','uses'=>'FeeController@createStudentLevel']);

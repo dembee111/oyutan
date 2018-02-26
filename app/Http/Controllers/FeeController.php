@@ -41,7 +41,8 @@ class FeeController extends Controller
                   ->join('groups','groups.group_id','=','classes.group_id')
                   ->join('levels','levels.level_id','=','classes.level_id')
                   ->join('programs','programs.program_id','=','levels.program_id')
-                  ->where('students.student_id',$studentId);
+                  ->where('students.student_id',$studentId)
+                   ;
     }
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
       public function show_school_fee($level_id)
@@ -84,6 +85,7 @@ class FeeController extends Controller
                               ->join('transactions','transactions.transact_id','=','receiptdetails.transact_id')
                               ->join('fees','fees.fee_id','=','transactions.fee_id')
                               ->join('users','users.id','=','transactions.user_id')
+                              ->join('studentfees','studentfees.s_fee_id','=','transactions.s_fee_id')
                               ->where('students.student_id',$student_id);
 
     }
@@ -219,7 +221,7 @@ class FeeController extends Controller
                       ->join('levels','levels.level_id','=','fees.level_id')
                       ->join('programs','programs.program_id','=','levels.program_id')
                       ->join('users','users.id','=','transactions.user_id')
-
+                      ->where('receipts.receipt_id',$receipt_id)
                       ->select('students.student_id',
                                'students.first_name',
                                'students.last_name',
@@ -230,10 +232,9 @@ class FeeController extends Controller
                                'transactions.paid',
                                'users.name',
                                'receipts.receipt_id',
-                               'levels.level_id',
-                               'transactions.s_fee_id')
-                      ->where('receipts.receipt_id',$receipt_id)
-                      ->first();
+                               'transactions.s_fee_id',
+                               'levels.level_id')
+                               ->first();
 
                       $status = MyClass::join('levels','levels.level_id','=','classes.level_id')
                                        ->join('shifts','shifts.shift_id','=','classes.shift_id')
@@ -265,9 +266,41 @@ class FeeController extends Controller
     }
 
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-    
+
+     public function deleteTransact($transact_id)
+     {
+       Transaction::destroy($transact_id);
+       return back();
+     }
+   //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+   public function showLevelStudent(Request $request)
+   {
+            $status = MyClass::join('levels','levels.level_id','=','classes.level_id')
+                              ->join('shifts','shifts.shift_id','=','classes.shift_id')
+                              ->join('times','times.time_id','=','classes.time_id')
+                              ->join('groups','groups.group_id','=','classes.group_id')
+                              ->join('batches','batches.batch_id','=','classes.batch_id')
+                              ->join('academics','academics.academic_id','=','classes.academic_id')
+                              ->join('programs','programs.program_id','=','levels.program_id')
+                              ->join('statuses','statuses.class_id','=','classes.class_id')
+                              ->where('levels.level_id',$request->level_id)
+                              ->where('statuses.student_id',$request->student_id)
+                              ->select(DB::raw('CONCAT(programs.program,
+                                               " / Level-",levels.level,
+                                               " / Shift-",shifts.shift,
+                                               " / Time-",times.time,
+                                               " / Group-",groups.groups,
+                                               " / Batch-",batches.batch,
+                                               " / Academic-",academics.academic,
+                                               " / Start Date-",classes.start_date,
+                                               " / ",classes.end_date
+                                               )As detail'))
+                              ->first();
+                  return response($status);
+   }
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
     public function createStudentLevel()
     {
-      Status::insert(['student_id'=>34, 'class_id'=>1]);
+      Status::insert(['student_id'=>31, 'class_id'=>1]);
     }
 }

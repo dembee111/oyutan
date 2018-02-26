@@ -30,11 +30,11 @@
             <table style="margin-top: -12px;">
               <caption class="academicDetail">
                 {{ $status->program }} /
-                Level: {{ $status->level }} /
-                Shift {{ $status->shift }} /
-                Time: {{ $status->time }} /
-                Batch: {{ $status->batch }} /
-                Group: {{ $status->groups }}
+                Level-{{ $status->level }} /
+                Shift-{{ $status->shift }} /
+                Time-{{ $status->time }} /
+                Batch-{{ $status->batch }} /
+                Group-{{ $status->groups }}
               </caption>
               <thead>
                 <tr>

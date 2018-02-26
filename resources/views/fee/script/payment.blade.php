@@ -37,9 +37,9 @@
                 $('#s_fee_id').val(data.s_fee_id);
                 //$('#program_id').val(data.program_id);
                 //$('#Level_ID').val(data.level_id);
-                $('#level_id').val(data.level_id);
+                $('#LevelID').val(data.level_id);
                 $('#Fee').val(data.school_fee);
-                $('#fee_id').val(data.fee_id);
+                $('#FeeID').val(data.fee_id);
                 $('#Amount').val(data.student_amount);
                 $('#Discount').val(data.discount);
                 $('#Pay').avl(balance);
@@ -47,6 +47,7 @@
                 $('#Pay').select();
                 $('$b').val(balance);
                 addItem(data);
+                showStudentLevel(data);
 
          })
        })
@@ -61,6 +62,13 @@
              value : data.level_id,
              text : data.level
            }))
+       }
+       //----------------------------------------------------
+       function showStudentLevel(data)
+       {
+         $.get("{{ route('showLevelStudent') }}",{level_id:data.level_id,student_id:data.student_id},function(data){
+                   $('academicDetail').text(data.detail);
+         })
        }
        //----------------------------------------------------
         $('.btn-reset').on('click',function(e){
