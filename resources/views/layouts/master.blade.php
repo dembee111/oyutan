@@ -9,7 +9,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="website/img/favicon.png">
 
-  <title>Сургууль Менежмент</title>
+  @yield('title','Dashboard')
 
   {!! Html::style('website/css/bootstrap.min.css') !!}
   {!! Html::style('website/css/bootstrap-theme.css') !!}
@@ -29,6 +29,7 @@
   {{-----------additional--------------}}
   {!!Html::style('website/css/jquery.dataTables.min.css')!!}
   {!!Html::style('website/css/buttons.dataTables.min.css')!!}
+
   @yield('style')
 </head>
 <body>

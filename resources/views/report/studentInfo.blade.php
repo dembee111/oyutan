@@ -1,4 +1,4 @@
-<table class="table table-bordered table-hover table-striped table-condesed">
+<table class="table table-bordered table-hover table-striped table-condesed" id="student-info">
   <caption>{{ $classes[1]->program }}</caption>
   <thead>
 
@@ -24,3 +24,16 @@
      @endforeach
   </tbody>
 </table>
+<script type="text/javascript">
+     $(document).ready(function(){
+       $('#student-info').DataTable({
+          dom: 'Bfrtip',
+          buttons: [
+              'copyHtml5',
+              'excelHtml5',
+              'csvHtml5',
+              'pdfHtml5'
+        ]
+       })
+     })
+</script>
