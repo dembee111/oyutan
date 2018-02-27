@@ -26,6 +26,9 @@
   {!! Html::style('website/css/style-responsive.css') !!}
   {!! Html::style('website/css/xcharts.min.css') !!}
   {!! Html::style('website/css/jquery-ui-1.10.4.min.css') !!}
+  {{-----------additional--------------}}
+  {!!Html::style('website/css/jquery.dataTables.min.css')!!}
+  {!!Html::style('website/css/buttons.dataTables.min.css')!!}
   @yield('style')
 </head>
 <body>
@@ -70,6 +73,14 @@
   {!! Html::script('website/js/sparklines.js') !!}
   {!! Html::script('website/js/charts.js') !!}
   {!! Html::script('website/js/jquery.slimscroll.min.js') !!}
+  {!! Html::script('website/js/jquery.dataTables.min.js') !!}
+  {!! Html::script('website/js/dataTables.buttons.min.js') !!}
+  {!! Html::script('website/js/jszip.min.js') !!}
+  {!! Html::script('website/js/pdfmake.min.js') !!}
+  {!! Html::script('website/js/vfs_fonts.js') !!}
+  {!! Html::script('website/js/buttons.html5.min.js') !!}
+
+
    @yield('scripts')
     <script>
       //knob
