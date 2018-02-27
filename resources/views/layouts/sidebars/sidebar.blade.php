@@ -51,7 +51,7 @@
                      <span class="menu-arrow arrow_carrot-right"></span>
                  </a>
        <ul class="sub">
-         <li><a class="" href="#">Оюутны жагсаалт</a></li>
+         <li><a class="" href="{{ route('getStudentList') }}">Оюутны жагсаалт</a></li>
        </ul>
      </li>
 

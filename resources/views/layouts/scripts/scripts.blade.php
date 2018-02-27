@@ -5,7 +5,8 @@ window.Laravel = {!! json_encode([
     'csrfToken' => csrf_token(),
 ]) !!};
 //=================================================
-   showClassInfo();
+
+
    //=====================================================
    $('#academic_id').on('change',function(e){
      showClassInfo();

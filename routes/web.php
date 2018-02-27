@@ -78,6 +78,11 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::get('/fee/student/transaction/delete{transactId}',['as'=>'deleteTransact', 'uses'=>'FeeController@deleteTransact']);
             Route::get('/fee/student/show/level',['as'=>'showLevelStudent', 'uses'=>'FeeController@showLevelStudent']);
 
+            //----------------------Student report--------------------------------------
+
+            Route::get('/report/student-list',['as'=>'getStudentList','uses'=>'ReportController@getStudentList']);
+            Route::get('/report/student-info',['as'=>'showStudentInfo','uses'=>'ReportController@showStudentInfo']);
+
             //route test
             Route::get('/create/student/level',['as'=>'createStudentLevel','uses'=>'FeeController@createStudentLevel']);
        //for Admin
