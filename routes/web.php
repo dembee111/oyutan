@@ -77,6 +77,8 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::get('/fee/student/print/invoice/{receiptId}',['as'=>'printInvoice','uses'=>'FeeController@printInvoice']);
             Route::get('/fee/student/transaction/delete{transactId}',['as'=>'deleteTransact', 'uses'=>'FeeController@deleteTransact']);
             Route::get('/fee/student/show/level',['as'=>'showLevelStudent', 'uses'=>'FeeController@showLevelStudent']);
+            //---------------------- Fee Report ----------------------------------------
+            Route::get('/fee/report',['as'=>'getFeeReport','uses'=>'FeeController@getFeeReport']);
 
             //----------------------Student report--------------------------------------
 

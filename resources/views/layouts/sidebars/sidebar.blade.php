@@ -41,7 +41,10 @@
                  </a>
        <ul class="sub">
          <li><a class="" href="{{ route('getPayment') }}">Student Payment</a></li>
+         <li><a class="" href="{{ route('getFeeReport')}}">Fee Report</a></li>
        </ul>
+            part 32/ 07:25 minut
+
      </li>
 
      <li class="sub-menu">

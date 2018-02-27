@@ -303,4 +303,11 @@ class FeeController extends Controller
     {
       Status::insert(['student_id'=>31, 'class_id'=>1]);
     }
+
+    //-----------------------------------------------------------
+
+    public function getFeeReport()
+    {
+      return view('fee.feeReport');
+    }
 }
