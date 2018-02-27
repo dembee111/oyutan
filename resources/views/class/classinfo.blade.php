@@ -26,6 +26,9 @@
         <th>Time</th>
         <th>Academic Detail</th>
         <th hidden="hidden">Action</th>
+        <th>
+          <input type="checkbox" id="checkall">
+          </th>
       </tr>
     </thead>
     <tbody>
@@ -43,6 +46,9 @@
             </td>
             <td style="vertical-align: middle; width:50px;" id="hidden">
                 <button value="{{ $c->class_id }}" class="btn btn-danger btn-sm del-class">Устгах</button>
+            </td>
+            <td>
+                <input type="checkbox" name="chk[]" value="{{ $c->class_id }}" class="chk">
             </td>
           </tr>
       @endforeach

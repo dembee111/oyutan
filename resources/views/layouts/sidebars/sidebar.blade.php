@@ -52,6 +52,7 @@
                  </a>
        <ul class="sub">
          <li><a class="" href="{{ route('getStudentList') }}">Оюутны жагсаалт</a></li>
+         <li><a class="" href="{{ route('getStudentListMultiClass') }}">Multi Class Student List</a></li>
        </ul>
      </li>
 

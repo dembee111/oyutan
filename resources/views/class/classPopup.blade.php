@@ -133,11 +133,16 @@
 
               </form>
               {{----------------------}}
+              <form action="#" method="GET" id="frm-multi-class">
             <div class="panel panel-default">
-               <div class="panel-heading">Class Information</div>
+               <div class="panel-heading">
+                 Class Information
+                 <button type="button" id="btn-go" class="btn btn-info btn-xs pull-right" style="margin-top:5px">Go</button>
+               </div>
                <div class="panel-body" id="add-class-info" style="overflow-y:auto; height:250px;">
                </div>
                </div>
+               </form>
        </section>
 
 

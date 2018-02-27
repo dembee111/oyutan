@@ -312,11 +312,14 @@ fieldset legend {
 @include('layouts.scripts.scriptClassPopup')
 <script type="text/javascript">
 
+$('#frm-multi-class #btn-go').addClass('hidden');
+
 $(document).on('click', '#class-edit',function(e){
   e.preventDefault();
    $('#class_id').val($(this).data('id'));
    $('.academic-detail p').text($(this).text());
    $('#choose-academic').modal('hide');
+
 })
 
 
