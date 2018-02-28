@@ -320,10 +320,12 @@ class FeeController extends Controller
                                     "students.last_name",
                                     "fees.amount as school_fee",
                                     "studentfees.amount as student_fee",
+                                    "studentfees.discount",
                                     "transactions.transact_date",
                                     "transactions.paid")
                           ->whereDate("transactions.transact_date",">=",$request->from)
-                          ->whereDate("transactions.transact_date","<=",$request->to)          
+                          ->whereDate("transactions.transact_date","<=",$request->to)
+                          ->orderBy("students.student_id")
                            ->get();
               return view('fee.feelist',compact('fees'));
     }
