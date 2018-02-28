@@ -63,8 +63,9 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
           //---------------------------Student Register------------------------------------------------------------------
 
           Route::get('/student/getregister',['as'=>'getStudentRegister','uses'=>'StudentController@getStudentRegister']);
-
           Route::post('/student/postregister',['as'=>'postStudentRegister','uses'=>'StudentController@postStudentRegister']);
+          Route::get('/student/info',['as'=>'studentInfo','uses'=>'StudentController@studentInfo']);
+
 
           //-----------------------------payment-------------------------------------------------------------------------
             Route::get('/student/show/payment',['as'=>'getPayment','uses'=>'FeeController@getPayment']);

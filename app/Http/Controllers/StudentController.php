@@ -16,6 +16,7 @@ use App\Status;
 use Auth;
 use File;
 use Storage;
+use DB;
 
 class StudentController extends Controller
 {
@@ -75,4 +76,33 @@ class StudentController extends Controller
             return redirect()->route('goPayment',['student_id'=>$student_id]);
           }
     }
+    //----------------------------show in student info -------------------------------
+    public function studentInfo(Request $request)
+    {
+      if($request->has('search')){
+          $students = Student::where('student_id',$request->search)
+                            ->Orwhere('first_name',"LIKE","%".$request->search."%")
+                            ->Orwhere('last_name',"LIKE","%".$request->search."%")
+                            ->select(DB::raw('student_id,
+                                              first_name,
+                                              last_name,
+                                              CONCAT(first_name," ",last_name) AS full_name,
+                                              (CASE WHEN Sex=0 THEN "M" ELSE "F" END) AS Sex,
+                                              dob'));
+      }else
+      {
+            $students = Student::select(DB::raw('student_id,
+                                                first_name,
+                                                last_name,
+                                                CONCAT(first_name," ",last_name) AS full_name,
+                                                (CASE WHEN Sex=0 THEN "M" ELSE "F" END) AS Sex,
+                                                dob'))
+                              ->paginate(10)
+                              ->appends('search',$request->search);
+      }
+
+         return view('student.studentList',compact('students'));
+    }
+
+
 }
