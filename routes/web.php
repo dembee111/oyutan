@@ -79,6 +79,7 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::get('/fee/student/show/level',['as'=>'showLevelStudent', 'uses'=>'FeeController@showLevelStudent']);
             //---------------------- Fee Report ----------------------------------------
             Route::get('/fee/report',['as'=>'getFeeReport','uses'=>'FeeController@getFeeReport']);
+            Route::get('/fee/show/fee-report',['as'=>'showFeeReport','uses'=>'FeeController@showFeeReport']);
 
             //----------------------Student report--------------------------------------
 
