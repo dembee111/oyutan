@@ -15,7 +15,7 @@
                    <label for="academic-year">Academic year</label>
                    <div class="input-group">
                      <select class="form-control" name="academic_id" id="academic_id">
-                             <option value="">--------------</option>
+
                              @foreach($academics as $key =>$y)
                                 <option value="{{ $y->academic_id }}">{{ $y->academic }}</option>
                              @endforeach
@@ -64,7 +64,7 @@
                      <label for="shift">Shift</label>
                      <div class="input-group">
                        <select class="form-control" name="shift_id" id="shift_id">
-                         <option value="">Сонгоно уу!</option>
+
                             @foreach($shift as $shf)
                                 <option value="{{$shf->shift_id }}">{{ $shf->shift }}</option>
                             @endforeach
@@ -80,7 +80,7 @@
                      <label for="time">Time</label>
                      <div class="input-group">
                        <select class="form-control" name="time_id" id="time_id">
-                         <option value="">Сонгоно уу!</option>
+
                             @foreach($time as $term)
                                 <option value="{{$term->time_id }}">{{ $term->time }}</option>
                            @endforeach
@@ -97,7 +97,7 @@
                      <label for="batch">Batch</label>
                      <div class="input-group">
                        <select class="form-control" name="batch_id" id="batch_id">
-                         <option value="">Сонгоно уу!</option>
+
                             @foreach($batch as $batt)
                                 <option value="{{$batt->batch_id }}">{{ $batt->batch }}</option>
                            @endforeach
@@ -114,7 +114,7 @@
                      <label for="group">Group</label>
                      <div class="input-group">
                        <select class="form-control" name="group_id" id="group_id">
-                         <option value="">Сонгоно уу!</option>
+                         
                             @foreach($group as $gol)
                                 <option value="{{$gol->group_id }}">{{ $gol->group }}</option>
                            @endforeach
