@@ -5,30 +5,9 @@ window.Laravel = {!! json_encode([
     'csrfToken' => csrf_token(),
 ]) !!};
 //=================================================
+    showClassInfo();
 
 
-   //=====================================================
-   $('#academic_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#program_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#level_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#shift_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#time_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#batch_id').on('change',function(e){
-     showClassInfo();
-   })
-   $('#group_id').on('change',function(e){
-     showClassInfo();
-   })
     //===============Date picker ===========================
     $('#start_date').datepicker({
           changeMonth:true,
@@ -41,74 +20,72 @@ window.Laravel = {!! json_encode([
           changeYear:true,
           dateFormat:'yy-mm-dd'
           })
-    //======================================================
-    $('#frm-create-class').on('submit',function(e){
-      e.preventDefault();
-      var data = $(this).serialize();
-      var url = $(this).attr('action');
-      $.post(url,data,function(data){
-              showClassInfo(data.academic_id);
-        })
-          $(this).trigger('reset');
-      })
-      //==============================================
-         $('.btn-update-class').on('click',function(e){
-           e.preventDefault();
-           var data = $('#frm-create-class').serialize();
-           $.post("{{ route('updateClassInfo')}}",data,function(data){
-             showClassInfo(data.academic_id);
+
+          //========левелийн dropdown дээр левелийн поргам харуулах js
+           $("#frm-create-class #program_id").on('change',function(e){
+                   var program_id = $(this).val();
+                   var level = $('#level_id')
+                   $(level).empty();
+                   $.get("{{ route('showLevel')}}",{program_id:program_id},function(data){
+
+                       $.each(data,function(i,l){
+                          $(level).append($("<option/>",{
+                            value : l.level_id,
+                            text : l.level
+                          }))
+                       })
+                     showClassInfo();
+                   })
            })
-         })
 
-      //===============засвар=========================
-       $(document).on('click','#class-edit',function(data){
-          var class_id = $(this).data('id');
-          $.get("{{ route('editClass') }}",{class_id:class_id},function(data){
-                 $('#academic_id').val(data.academic_id);
-                 $('#level_id').val(data.level_id);
-                 $('#shift_id').val(data.shift_id);
-                 $('#time_id').val(data.time_id);
-                 $('#group_id').val(data.group_id);
-                 $('#batch_id').val(data.batch_id);
-                 $('#start_date').val(data.start_date);
-                 $('#end_date').val(data.end_date);
-                 $('#class_id').val(data.class_id);
-          })
-       })
-      //===============Устгах ========================
-       $(document).on('click','.del-class', function(e){
-           class_id = $(this).val();
-           $.post(" {{ route('deleteClass')}}",{class_id:class_id},function(data){
-               showClassInfo($('#academic_id').val());
+  //=====================================================
+           $('#academic_id').on('change',function(e){
+             showClassInfo()
            })
-       })
+           $('#program_id').on('change',function(e){
+             showClassInfo()
+           })
+           $('#level_id').on('change',function(e){
+             showClassInfo()
+           })
+           $('#shift_id').on('change',function(e){
+             showClassInfo()
+           })
+           $('#time_id').on('change',function(e){
+             showClassInfo()
+           })
+           $('#batch_id').on('change',function(e){
+             showClassInfo()
+           })
+           $('#group_id').on('change',function(e){
+             showClassInfo()
+           })
 
-      //=====================================================
-      function showClassInfo()
-       {
-         var data = $('#frm-create-class').serialize();
+           //================================================
+           $('#add-more-academic').on('click', function(){
+                $('#academic-year-show').modal();
+           })
 
 
-         $.get("{{ route('showClassInformation') }}",data,function(data){
-           $('#add-class-info').empty().append(data);
-           MergeCommonRows($('#table-class-info'));
-         })
-       }
+
 
     //===============Group modal============================
+
     $('#frm-group-create').on('submit',function(e){
-            e.preventDefault();
-            var data =$(this).serialize();
-            var group = $('#group_id');
-            $(group).empty();
-            $.post("{{ route('createGroup') }}",data,function(data){
-                  $('#group_id').append($("<option/>",{
-                    value : data.group_id,
-                    text : data.group
-                  }))
-      })
-      $(this).trigger("reset");
-    })
+        	e.preventDefault();
+        	var data = $(this).serialize();
+        	$.post("{{ route('createGroup') }}",data,function(data){
+
+        		$('#group_id').append($("<option/>",{
+        			value : data.group_id,
+        			text  :  data.groups
+
+        		}));
+        	});
+
+	  $(this).trigger('reset');
+
+     });
 
 
       $('#add-more-group').on('click',function(e){
@@ -157,6 +134,20 @@ window.Laravel = {!! json_encode([
          $('#time-show').modal('show');
 })
 
+    //======academic oruulahad route
+    $('.btn-save-academic').on('click',function(){
+       var academic = $('#new-academic').val();
+       $.post("{{ route('postInsertAcademic') }}",{academic:academic},function(data){
+
+                            $('#academic_id').append($("<option/>",{
+                              value : data.academic_id,
+                              text :  data.academic
+                            }))
+                           $('#new-academic').val("");
+
+
+       })
+    })
 
 
     //===============Шифт модал======================
@@ -180,22 +171,7 @@ window.Laravel = {!! json_encode([
 
 
        })
-    //========левелийн dropdown дээр левелийн поргам харуулах js
-     $("#frm-create-class #program_id").on('change',function(e){
-             var program_id = $(this).val();
-             var level = $('#level_id')
-             $(level).empty();
-             $.get("{{ route('showLevel')}}",{program_id:program_id},function(data){
 
-                 $.each(data,function(i,l){
-                    $(level).append($("<option/>",{
-                      value : l.level_id,
-                      text : l.level
-                    }))
-                 })
-               showClassInfo();
-             })
-     })
 
     //================================================
     $('#add-more-level').on('click', function(){
@@ -226,25 +202,9 @@ window.Laravel = {!! json_encode([
     })
 
 
-    //================================================
-    $('#add-more-academic').on('click', function(){
-         $('#academic-year-show').modal();
-    })
+
     //===============================================
-    //======academic oruulahad route
-    $('.btn-save-academic').on('click',function(){
-       var academic = $('#new-academic').val();
-       $.post("{{ route('postInsertAcademic') }}",{academic:academic},function(data){
 
-                            $('#academic_id').append($("<option/>",{
-                              value : data.academic_id,
-                              text :  data.academic
-                            }))
-                           $('#new-academic').val("");
-                           //--40:20 sec
-
-       })
-    })
     //=================================================
     //========academic data insert to DB for csrf
     $(document).ready(function(){
@@ -272,6 +232,29 @@ $('.btn-save-program').on('click',function(){
                $('#description').val("");
    })
 })
+
+//======================================================
+      $('#frm-create-class').on('submit',function(e){
+        e.preventDefault();
+        var data = $(this).serialize();
+        var url = $(this).attr('action');
+        $.post(url,data,function(data){
+                showClassInfo(data.academic_id);
+          })
+            $(this).trigger('reset');
+        })
+//=====================================================
+
+      function showClassInfo()
+       {
+         var data = $('#frm-create-class').serialize();
+
+
+         $.get("{{ route('showClassInformation') }}",data,function(data){
+           $('#add-class-info').empty().append(data);
+           MergeCommonRows($('#table-class-info'));
+         })
+       }
 //===================call class========================
 function MergeCommonRows(table){
   var firstColumnBrakes = [];
@@ -302,10 +285,35 @@ function MergeCommonRows(table){
 
 
 
+//===============Устгах ========================
+ $(document).on('click','.del-class', function(e){
+     class_id = $(this).val();
+     $.post(" {{ route('deleteClass')}}",{class_id:class_id},function(data){
+         showClassInfo($('#academic_id').val());
+     })
+ })
+//===============засвар=========================
+ $(document).on('click','#class-edit',function(data){
+    var class_id = $(this).data('id');
+    $.get("{{ route('editClass') }}",{class_id:class_id},function(data){
+           $('#academic_id').val(data.academic_id);
+           $('#level_id').val(data.level_id);
+           $('#shift_id').val(data.shift_id);
+           $('#time_id').val(data.time_id);
+           $('#group_id').val(data.group_id);
+           $('#batch_id').val(data.batch_id);
+           $('#start_date').val(data.start_date);
+           $('#end_date').val(data.end_date);
+           $('#class_id').val(data.class_id);
+    })
+ })
 
-//===========оюутаны скрипт=================
-//----------student-popup--------------------------
-
-
-
+//==============================================
+   $('.btn-update-class').on('click',function(e){
+     e.preventDefault();
+     var data = $('#frm-create-class').serialize();
+     $.post("{{ route('updateClassInfo')}}",data,function(data){
+       showClassInfo(data.academic_id);
+     })
+   })
 </script>

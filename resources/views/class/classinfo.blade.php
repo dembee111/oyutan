@@ -38,7 +38,7 @@
             <td>{{ $c->level }}</td>
             <td>{{ $c->shift}}</td>
             <td>{{ $c->time }}</td>
-            <td>
+            <td class="academic-detail">
                <a href="#" data-id="{{ $c->class_id }}" id="class-edit">
                   Program: {{ $c->program }} / Level:{{ $c->level }} / Shift:{{ $c->shift }} / Time: {{ $c->time }} / Batch:{{ $c->batch }}
                   / Group: {{ $c->groups }} / StartDate: {{ date("d-M-y",strtotime( $c->start_date)) }} / EndDate: {{ date("d-M-y",strtotime( $c->end_date)) }}

@@ -88,6 +88,7 @@ Route::group(['middleware'=>['authen','roles'],'roles'=>['admin']],function(){
             Route::get('/report/student-info',['as'=>'showStudentInfo','uses'=>'ReportController@showStudentInfo']);
             Route::get('/report/student-multi-class',['as'=>'getStudentListMultiClass','uses'=>'ReportController@getStudentListMultiClass']);
             Route::get('/report/student-info-multi-class',['as'=>'showStudentInfoMultiClass','uses'=>'ReportController@showStudentInfoMultiClass']);
+            Route::get('/student/new/register',['as'=>'getNewStudentRegister','uses'=>'ReportController@getNewStudentRegister']);
 
             //route test
             Route::get('/create/student/level',['as'=>'createStudentLevel','uses'=>'FeeController@createStudentLevel']);

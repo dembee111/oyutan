@@ -5,7 +5,7 @@
   <div class="col-lg-12">
     <h3 class="page-header"><i class="fa fa-file-text-o"></i>Student List</h3>
     <ol class="breadcrumb">
-          <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+          <li><i class="fa fa-home"></i><a href="#">Home</a></li>
           <li><i class="icon_document_alt"></i>Student</li>
           <li><i class="fa fa-file-text-o"></i>Student List</li>
     </ol>
@@ -15,7 +15,7 @@
 <div class="panel panel-default">
   <div class="panel-body">
 
-    <form method="GET" id="frm-search">
+    <form action="{{ route('studentInfo')}}" method="GET" id="frm-search">
        <table>
          <tr>
            <td>
@@ -59,7 +59,7 @@
      </table>
 </div>
 <div class="footer">
-      
+          {{ $students->render() }}
 </div>
 </div>
 @endsection

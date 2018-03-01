@@ -87,8 +87,9 @@ class StudentController extends Controller
                                               first_name,
                                               last_name,
                                               CONCAT(first_name," ",last_name) AS full_name,
-                                              (CASE WHEN Sex=0 THEN "M" ELSE "F" END) AS Sex,
-                                              dob'));
+                                              (CASE WHEN Sex=0 THEN "M" ELSE "F" END) AS Sex, dob'))
+                                              ->paginate(10);
+
       }else
       {
             $students = Student::select(DB::raw('student_id,

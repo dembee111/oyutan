@@ -13,7 +13,10 @@ use App\Group;
 use App\MyClass;
 use App\Student;
 use App\Status;
+use Charts;
+use App\Charts\SampleChart;
 use DB;
+use App\User;
 
 class ReportController extends Controller
 {
@@ -92,12 +95,28 @@ class ReportController extends Controller
                              batches.batch,
                              groups.groups
                               '))
-              ->whereIn('classes.class_id',$request['chk'])                        
+              ->whereIn('classes.class_id',$request['chk'])
               ->get();
               return view('report.studentInfoMultiClass',compact('classes'));
 
               }
       }
     }
+       public function getNewStudentRegister()
+       {
+         $student = Student::where(DB::raw("(DATE_FORMAT(dateregistered,'%Y'))"),date('Y'))->select('dateregistered AS created_at')->get();
 
+      $chart = Charts::database($student, 'area', 'highcharts')
+
+          ->title("Monthly new Register Student")
+
+          ->elementLabel("Total Student")
+
+          ->dimensions(1000, 500)
+
+          ->responsive(false)
+
+          ->groupByMonth(date('Y'), true);
+return view('report.newStudentRegister',compact('chart'));
+       }
 }

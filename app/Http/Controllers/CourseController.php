@@ -111,55 +111,51 @@ class CourseController extends Controller
           }
         }
         //==========================================
-            public function showClassInformation(Request $request)
-            {
+        public function showClassInformation(Request $request){
 
+   if ($request->academic_id!="" && $request->program_id=="")
+   {
+          $filter = array('academics.academic_id'=>$request->academic_id);
+}
 
+    elseif (
+               $request->academic_id!="" &&
+               $request->program_id!="" &&
+               $request->level_id!="" &&
+               $request->shift_id!="" &&
+               $request->time_id!="" &&
+               $request->batch_id!="" &&
+               $request->group_id!=""
+       )
+     {
+       $filter = array('academics.academic_id'=>$request->academic_id,
+        'programs.program_id'=>$request->program_id,
+         'shifts.shift_id'=>$request->shift_id,
+         'levels.level_id'=>$request->level_id,
+        'times.time_id'=>$request->time_id,
+          'groups.group_id'=>$request->group_id,
+         'batches.batch_id'=>$request->batch_id);        }
 
-                if ($request->academic_id!="" && $request->program_id!="" && $request->level_id!="" && $request->shift_id!="")
-                 {
-                   $criterial = array('academics.academic_id'=>$request->academic_id);
+    $classes = $this->classInformation($filter)->get();
+    //dd($filter);
+    return view('class.classInfo',compact('classes'));
 
+  }
+  public function  classInformation($filter)
+  {
+    return MyClass::
+    join('academics','academics.academic_id','=','classes.academic_id')
+          ->join('levels','levels.level_id','=','classes.level_id')
 
-                 }elseif($request->academic_id!="" &&
-                         $request->program_id!="" &&
-                         $request->level_id!="" &&
-                         $request->shift_id!="" &&
-                         $request->time_id!="" &&
-                         $request->batch_id!="" &&
-                         $request->group_id!="")
-                         {
-                           $criterial = array('academics.academic_id'=>$request->academic_id,
-                                              'programs.program_id'=>$request->program_id,
-                                              'levels.level_id'=>$request->level_id,
-                                              'shifts.shift_id'=>$request->shift_id,
-                                              'times.time_id'=>$request->time_id,
-                                              'batches.batch_id'=>$request->batch_id,
-                                              'groups.group_id'=>$request->group_id);
-                           }
+    ->join('programs','programs.program_id','=','levels.program_id')
+    ->join('shifts','shifts.shift_id','=','classes.shift_id')
+    ->join('times','times.time_id','=','classes.time_id')
+    ->join('batches','batches.batch_id','=','classes.batch_id')
+    ->join('groups','groups.group_id','=','classes.group_id')
+       ->where($filter)
+    ->orderBy('classes.class_id','DESC');
 
-                           $classes = $this->ClassInformation($criterial)->get();
-                           return view('class.classinfo', compact('classes'));
-            }
-
-
-
-        //============================================
-        public function ClassInformation($criterial)
-        {
-            return MyClass::join('academics','academics.academic_id','=','classes.academic_id')
-
-                                ->join('levels','levels.level_id','=','classes.level_id')
-                                ->join('programs','programs.program_id','=','levels.program_id')
-                                ->join('shifts','shifts.shift_id','=','classes.shift_id')
-                                ->join('times','times.time_id','=','classes.time_id')
-                                ->join('batches','batches.batch_id','=','classes.batch_id')
-                                ->join('groups','groups.group_id','=','classes.group_id')
-                                ->where($criterial)
-                                ->orderBy('classes.class_id', 'DESC');
-
-
-        }
+  }
         //===============================================
         public function deleteClass(Request $request)
         {
