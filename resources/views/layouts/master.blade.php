@@ -39,6 +39,7 @@
      @include('layouts.sidebars.sidebar')
      <section id="main-content">
        <div class="wrapper">
+         @include('inc.messages')
        @yield('content')
      </div>
      </section>

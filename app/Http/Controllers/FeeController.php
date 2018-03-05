@@ -199,16 +199,27 @@ class FeeController extends Controller
 
     public function exstraPay(Request $request)
     {
-       $transact = Transaction::create($request->all());
 
-       if (count($transact)!=0)
-       {
-         $transact_id = $transact->transact_id;
-         $student_id = $transact->student_id;
-         $receipt_id = Receipt::autoNumber();
-         ReceiptDetail::create(['receipt_id'=>$receipt_id,'student_id'=>$student_id,'transact_id'=>$transact_id]);
-         return back();
-       }
+      $this->validate($request, [
+        's_fee_id' => 'required'],
+        ['s_fee_id.required' => 'Та талбаруудыг зөв оруулна уу!']
+        );
+
+
+        $transact = Transaction::create($request->all());
+
+          if (count($transact)!=0)
+          {
+            $transact_id = $transact->transact_id;
+            $student_id = $transact->student_id;
+            $receipt_id = Receipt::autoNumber();
+            ReceiptDetail::create(['receipt_id'=>$receipt_id,'student_id'=>$student_id,'transact_id'=>$transact_id]);
+            return back()->with('success', 'Амжилттай хадгаллаа');;
+          }
+
+
+
+
     }
     //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 

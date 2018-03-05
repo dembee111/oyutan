@@ -80,7 +80,7 @@
                   <input type="hidden" name="level_id" value="{{ $status->level_id }}" id="LevelID">
                   <input type="hidden" name="user_id" value="{{ Auth::id() }}" id="UserID">
                   <input type="hidden" name="transact_date" value="{{ date('Y-m-d H:i:s')}}" id="TransacDate">
-                  <input type="hidden" name="s_fee_id" id="s_fee_id">
+                  <input type="hidden" name="s_fee_id" value="{{ $transact->s_fee_id or null }}" id="s_fee_id">
                 </td>
                 <td>
                   <input type="text" name="amount" id="Amount" required class="d">
@@ -93,7 +93,7 @@
                 </td>
 
                 <td>
-                  <input type="text" name="lack" id="Lack" >
+                  <input type="text" name="lack" id="Lack" disabled >
                 </td>
               </tr>
 
